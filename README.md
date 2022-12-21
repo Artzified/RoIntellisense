@@ -110,7 +110,7 @@ The repository maintainers will review your pull request and may request changes
 Thank you for your contribution!
 
 ## Code of Conduct
-We expect all contributors to adhere to our [Code of Conduct](CODE-OF-CONDUCT). Please make sure to read and understand it before contributing.
+We expect all contributors to adhere to our [Code of Conduct](CODE-OF-CONDUCT.md). Please make sure to read and understand it before contributing.
 
 ## License
 By contributing to RoIntellisense, you agree that your contributions will be licensed under the [LICENSE](LICENSE) file in the root directory of this repository.
