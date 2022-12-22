@@ -1,6 +1,9 @@
 -- [[ SERVICES ]]
 
-
+local ScriptEditorService = game:GetService("ScriptEditorService")
+local HttpService = game:GetService("HttpService")
+local ServerStorage = game:GetService("ServerStorage")
+local Selection = game:GetService("Selection")
 
 -- [[ WIDGET VARIABLES ]]
 
@@ -16,7 +19,7 @@ local CEditorWidget: DockWidgetPluginGui = Wrapper.Parent
 local RoIntellisense
 
 local plugin: Plugin
-local Framework -- @module Framework
+local Framework
 
 -- [[ FUNCTIONS ]]
 
@@ -26,8 +29,9 @@ local function onUpdate()
 	Framework.commands:Load()
 	for _, command in Framework.commands:GetCommands() do
 		local clone = RoIntellisense.UIComponents.EditorField:Clone()
+		local id = HttpService:GenerateGUID(false)
 		
-		clone.Name = command.identifier .. ' [COMMAND]'
+		clone.Name = command.identifier .. ' [cmd]'
 		clone.Identifier.Text = command.identifier
 		
 		clone.MouseEnter:Connect(function()
@@ -39,16 +43,28 @@ local function onUpdate()
 		end)
 		
 		clone.Actions.Delete.MouseButton1Click:Connect(function()
-			local cmd = Framework.commands:GetCommandModule(command.identifier)
-			
-			if cmd then
-				cmd:Destroy()
-			end
-			
-			clone:Destroy()
-			
-			Framework.commands:Save()
+			Framework.commands:RemoveCommandModule(command.identifier)
 			onUpdate()
+		end)
+
+		clone.Actions.Edit.MouseButton1Click:Connect(function()
+			local tagged = Framework.collection:GetFirstTagged(id)
+
+			if tagged then -- submit
+				Framework.commands:AddCommandModule(tagged)
+				tagged:Destroy()
+
+				onUpdate()
+			else -- edit
+				local cmd = Framework.commands:GetCommandModule(command.identifier)
+				cmd.Parent = ServerStorage
+
+				Selection:Set{cmd}
+				ScriptEditorService:OpenScriptDocumentAsync(cmd)
+
+				Framework.collection:Tag(cmd, id)
+				clone.Actions.Edit.Image = 'rbxassetid://11593381530'
+			end
 		end)
 		
 		clone.LayoutOrder = command.priority

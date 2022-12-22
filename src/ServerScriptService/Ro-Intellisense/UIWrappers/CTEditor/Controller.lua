@@ -19,10 +19,7 @@ local Framework
 local Controller = {}
 
 function Controller:__env()
-	local fenv = getfenv(4)
-
-	plugin = fenv.plugin;
-	Framework = fenv.Framework;
+	
 end
 
 function Controller:init()

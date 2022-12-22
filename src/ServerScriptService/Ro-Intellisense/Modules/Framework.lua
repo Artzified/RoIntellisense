@@ -10,7 +10,7 @@ export type dockWidgetInfo = {
 
 -- [[ SERVICES ]]
 
-local CoreGui = game:GetService('CoreGui')
+local CoreGui = game:GetService("CoreGui")
 
 -- [[ VARIABLES ]]
 

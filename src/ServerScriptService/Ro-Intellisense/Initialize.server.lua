@@ -54,9 +54,11 @@ Framework.enabled = false
 
 local Commands = require(Modules.Commands)
 local Settings = require(Modules.Settings)
+local CollectionManager = require(Modules.CollectionManager)
 
 Commands:__env(plugin, Framework)
 Settings:__env(plugin, Framework)
+CollectionManager:__env(plugin, Framework)
 
 -- [[ PLUGIN BUTTONS ]]
 
@@ -122,6 +124,7 @@ Commands:Load()
 
 Framework.settings = Settings
 Framework.commands = Commands
+Framework.collection = CollectionManager
 
 Framework.outputDebug = outputDebug
 Framework.clearWithWhitelist = clearWithWhitelist
@@ -129,8 +132,6 @@ Framework.clearWithWhitelist = clearWithWhitelist
 Framework.RoIntellisense = RoIntellisense
 
 Framework:ExecuteAllWrappers()
-
-print(Commands:GetCommands())
 
 -- [[ CONNECTIONS ]]
 
@@ -155,9 +156,11 @@ Framework:OnClick('Ro-Intellisense', function()
 		
 		if not enabled then continue end
 		
-		outputDebug('•	Registered %s', identifier)
-		
-		Commands:Register(command)
+		local status = Commands:Register(command)
+
+		if status == 0 then -- success
+			outputDebug('•	Registered %s', identifier)
+		end
 	end
 	
 	Framework.loadingCommands = false

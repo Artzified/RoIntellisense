@@ -71,12 +71,9 @@ function Manager:Load()
 	commands = {}
 	
 	local data = Framework:GetSetting(MASTER_KEY, '{}')
-	
-	print(data)
+
 	do
 		data = decode(data)
-		
-		print(data)
 		
 		local loaderVersion = tostring(Framework:GetSetting('cmdLoaderVersion', LOADER_VERSION))
 		local loader = require(script['LoaderV' .. loaderVersion])
@@ -89,8 +86,6 @@ function Manager:Load()
 		
 		commands[command.identifier] = command
 	end
-	
-	Manager:Save()
 end
 
 function Manager:Save()	
@@ -108,6 +103,11 @@ function Manager:Deregister(id: string): (boolean, string?)
 end
 
 function Manager:Register(command: command)
+	if not (command.identifier or command.label or command.codeSample) then
+		Framework:Output('Unable to register %s due to lack of properties')
+		return 1
+	end
+
 	ScriptEditorService:RegisterAutocompleteCallback(command.identifier, command.priority or 1, function(req, res)		
 		local doc: ScriptDocument = req.textDocument.document
 		if doc:IsCommandBar() then return res end
@@ -166,6 +166,42 @@ function Manager:Register(command: command)
 
 		return res
 	end)
+
+	return 0
+end
+
+function Manager:AddCommandModule(cmd: ModuleScript)
+	local command = require(cmd)
+	if not (command.identifier or command.label or command.codeSample) then
+		Framework:Output('Unable to register due to lack of properties')
+		return 1
+	end
+
+	local module = RoIntellisense.Commands:FindFirstChild(cmd.Name) or Instance.new('ModuleScript')
+	module.Name = command.identifier
+	module.Source = cmd.Source
+
+	module.Parent = RoIntellisense.Commands
+
+	Manager:Save()
+	Manager:Load()
+
+	cmd:Destroy()
+
+	return 0
+end
+
+function Manager:RemoveCommandModule(id: string)
+	local cmd = Manager:GetCommandModule(id)
+
+	if not cmd then return end
+
+	cmd:Destroy()
+	Manager:Save()
+
+	commands[id] = nil
+
+	return 0
 end
 
 -- [[ GETTERS ]]
@@ -179,11 +215,7 @@ function Manager:GetCommand(id: string)
 end
 
 function Manager:GetCommandModule(id: string)
-	for _, cmd in RoIntellisense.Commands:GetChildren() do
-		if cmd.Name == id then
-			return cmd
-		end
-	end
+	return RoIntellisense.Commands:FindFirstChild(id)
 end
 
 return Manager
