@@ -110,7 +110,10 @@ The repository maintainers will review your pull request and may request changes
 Thank you for your contribution!
 
 ## Code of Conduct
-We expect all contributors to adhere to our [Code of Conduct](CODE-OF-CONDUCT). Please make sure to read and understand it before contributing.
+We expect all contributors to adhere to our [Code of Conduct](CODE-OF-CONDUCT.md). Please make sure to read and understand it before contributing.
 
 ## License
 By contributing to RoIntellisense, you agree that your contributions will be licensed under the [LICENSE](LICENSE) file in the root directory of this repository.
+
+## Support me
+If you would like to support my work, you can do so by making a [donation](https://www.roblox.com/games/10031431160/Artzified-Plugin-Donation-Center). Any amount is appreciated and helps me continue doing what I love. Thank you.
