@@ -23,10 +23,6 @@ In order to use the RoIntellisense Command Editor:
 
 ## Documentation
 
-Documentation is splitted into 2 groups, one is which is related the commands editor and the other is related to the comments editor
-
-### Command Editor
-
 - __Property__: `identifier`
 - __Type__: string
 - __Optional__: Yes
@@ -80,44 +76,6 @@ Documentation is splitted into 2 groups, one is which is related the commands ed
 - __Type__: table
 - __Optional__: No
 - __Description__: The command will only register if the current placeId is inside the property.
-
-#
-
-### Comment Editor
-
-- __Property__: `identifier`
-- __Type__: string
-- __Optional__: Yes
-- __Description__: An unique identifier to the comment, having 2 same identifier may cause a duplication bug.
-
-#
-
-- __Property__: `priority`
-- __Type__: number
-- __Optional__: No
-- __Description__: Defines the command's priority, the higher it is, the higher it is in the autocomplete list.
-
-#
-
-- __Property__: `label`
-- __Type__: number
-- __Optional__: Yes
-- __Description__: Defines the command's label, shown on the comments menu.
-
-#
-
-- __Property__: `icon`
-- __Type__: string
-- __Optional__: No
-- __Description__: Defines the comment's icon, shown on the comments menu.
-
-#
-
-- __Property__: `commentSample`
-- __Type__: string
-- __Optional__: Yes
-- __Description__: Defines the comment's divider.
-
 
 ## Contributing
 We welcome and encourage contributions to RoIntellisense! Here are some guidelines to follow:
