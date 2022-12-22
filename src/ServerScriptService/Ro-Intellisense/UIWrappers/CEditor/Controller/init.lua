@@ -88,7 +88,7 @@ function Controller:init()
 	CEditorWidget:GetPropertyChangedSignal('Enabled'):Connect(onUpdate)
 	
 	Topbar.CreateNewCommand.MouseButton1Click:Connect(function()
-		local clone = script.temp:Clone()
+		local clone = script.template:Clone()
 		clone.Parent = RoIntellisense.Commands
 		
 		onUpdate()

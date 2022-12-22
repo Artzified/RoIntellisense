@@ -1,11 +1,12 @@
 -- [[ TYPES ]]
 
-export type types = 'string' | 'bool' | 'number' | 'int'
+export type types = 'string' | 'bool' | 'number'
 
 export type settingBody = {
 	key: string;
-	default: string;
+	description: string;
 	valueType: string;
+	default: string;
 	restrictions: (() -> boolean)?
 }
 
@@ -20,10 +21,6 @@ local settingsBody = {}
 local settingsData = {}
 
 -- [[ FUNCTIONS ]]
-
-local function title(x)
-	return x:sub(1, 1):upper() .. x:sub(2, #x)
-end
 
 -- [[ MODULE ]]
 
@@ -47,15 +44,15 @@ end
 
 -- [[ GETTERS ]]
 
-function Manager:build()
+function Manager:GetBody(): {settingBody}
+	return settingsBody
+end
+
+function Manager:build(): {any}
 	for _, body: settingBody in settingsBody do
 		local value = Framework:GetSetting(body.key, body.default)
 		
-		local class: types = title(body.valueType) .. 'Value'
-		
-		local holder = script:FindFirstChild(body.key) or Instance.new(class)
-		holder.Value = value
-		holder.Parent = script
+		settingsData[body.key] = value
 	end
 	
 	return settingsData

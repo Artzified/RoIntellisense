@@ -88,7 +88,7 @@ function Manager:Load()
 	end
 end
 
-function Manager:Save()	
+function Manager:Save()
 	Framework:SetSetting('cmdLoaderVersion', LOADER_VERSION)
 	local loader = require(script['LoaderV' .. LOADER_VERSION])
 	
@@ -102,7 +102,7 @@ function Manager:Deregister(id: string): (boolean, string?)
 	return pcall(ScriptEditorService.DeregisterAutocompleteCallback, ScriptEditorService, id)
 end
 
-function Manager:Register(command: command)
+function Manager:Register(command: command): number
 	if not (command.identifier or command.label or command.codeSample) then
 		Framework:Output('Unable to register %s due to lack of properties')
 		return 1
@@ -170,14 +170,14 @@ function Manager:Register(command: command)
 	return 0
 end
 
-function Manager:AddCommandModule(cmd: ModuleScript)
+function Manager:AddCommandModule(cmd: ModuleScript): number
 	local command = require(cmd)
 	if not (command.identifier or command.label or command.codeSample) then
 		Framework:Output('Unable to register due to lack of properties')
 		return 1
 	end
 
-	local module = RoIntellisense.Commands:FindFirstChild(cmd.Name) or Instance.new('ModuleScript')
+	local module = RoIntellisense.Commands:FindFirstChild(command.identifier) or Instance.new('ModuleScript')
 	module.Name = command.identifier
 	module.Source = cmd.Source
 
@@ -191,7 +191,7 @@ function Manager:AddCommandModule(cmd: ModuleScript)
 	return 0
 end
 
-function Manager:RemoveCommandModule(id: string)
+function Manager:RemoveCommandModule(id: string): number
 	local cmd = Manager:GetCommandModule(id)
 
 	if not cmd then return end
@@ -206,15 +206,15 @@ end
 
 -- [[ GETTERS ]]
 
-function Manager:GetCommands()
+function Manager:GetCommands(): {command}
 	return commands
 end
 
-function Manager:GetCommand(id: string)
+function Manager:GetCommand(id: string): command
 	return commands[id]
 end
 
-function Manager:GetCommandModule(id: string)
+function Manager:GetCommandModule(id: string): ModuleScript
 	return RoIntellisense.Commands:FindFirstChild(id)
 end
 

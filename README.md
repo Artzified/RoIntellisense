@@ -62,7 +62,7 @@ Documentation is splitted into 2 groups, one is which is related the commands ed
 
 #
 
-- __Property__: `value`
+- __Property__: `documentation.value`
 - __Type__: string
 - __Optional__: No
 - __Description__: An element in the documentation property.
@@ -73,6 +73,13 @@ Documentation is splitted into 2 groups, one is which is related the commands ed
 - __Type__: string
 - __Optional__: Yes
 - __Description__: Defines the command's codeSample, shown on the autocomplete details and acts as the replacement code.
+
+#
+
+- __Property__: `exclusiveTo`
+- __Type__: table
+- __Optional__: No
+- __Description__: The command will only register if the current placeId is inside the property.
 
 #
 
@@ -92,7 +99,21 @@ Documentation is splitted into 2 groups, one is which is related the commands ed
 
 #
 
-- __Property__: `comment`
+- __Property__: `label`
+- __Type__: number
+- __Optional__: Yes
+- __Description__: Defines the command's label, shown on the comments menu.
+
+#
+
+- __Property__: `icon`
+- __Type__: string
+- __Optional__: No
+- __Description__: Defines the comment's icon, shown on the comments menu.
+
+#
+
+- __Property__: `commentSample`
 - __Type__: string
 - __Optional__: Yes
 - __Description__: Defines the comment's divider.
@@ -102,8 +123,7 @@ Documentation is splitted into 2 groups, one is which is related the commands ed
 We welcome and encourage contributions to RoIntellisense! Here are some guidelines to follow:
 
 - Fork the repository and create a new branch for your changes.
-- Make your changes, including relevant documentation and tests.
-- Ensure that all tests pass before submitting your changes.
+- Make your changes, including relevant documentation.
 - Create a pull request from your fork to the main repository.
 
 The repository maintainers will review your pull request and may request changes or merge it.

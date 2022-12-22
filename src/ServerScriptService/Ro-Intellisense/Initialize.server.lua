@@ -43,16 +43,17 @@ local UIWrappers = RoIntellisense.UIWrappers
 -- [[ WRAPPERS ]]
 
 local CEditorWrapper = UIWrappers.CEditor
-local CTEditorWrapper = UIWrappers.CTEditor
 local SettingsWrapper = UIWrappers.Settings
 
 -- [[ PLUGIN ]]
+
 local Framework = require(Modules.Framework).new('Ro-Intellisense')
 Framework.enabled = false
 
 -- [[ MODULES ]]
 
 local Commands = require(Modules.Commands)
+
 local Settings = require(Modules.Settings)
 local CollectionManager = require(Modules.CollectionManager)
 
@@ -66,7 +67,6 @@ Framework:CreateToolbarButton('Ro-Intellisense', 'Turn Ro-Intellisense on/off', 
 Framework:CreateToolbarButton('Settings', 'Plugin configuration', 11358544124)
 
 Framework:CreateToolbarButton('Commands Editor', 'Edit command snippets', 11817732062)
-Framework:CreateToolbarButton('Comments Editor', 'Edit comment dividers', 11817718878)
 
 -- [[ PLUGIN WIDGETS ]]
 
@@ -85,7 +85,6 @@ local info = {
 }
 
 Framework:CreateDockWidgetGui('CEditor', CEditorWrapper, info)
-Framework:CreateDockWidgetGui('CTEditor', CTEditorWrapper, info)
 Framework:CreateDockWidgetGui('Settings', SettingsWrapper, info)
 
 -- [[ FUNCTIONS ]]
@@ -111,9 +110,9 @@ end
 do
 	Settings:AddSetting({
 		key = 'debug';
-		default = false;
-		
+		description = 'Adds fancy debug print';
 		valueType = 'bool';
+		default = false;
 		restrictions = nil;
 	})
 	
@@ -155,15 +154,32 @@ Framework:OnClick('Ro-Intellisense', function()
 		Commands:Deregister(identifier)
 		
 		if not enabled then continue end
+
+		local placeIds = command.exclusiveTo
+
+		if placeIds and not table.find(placeIds, game.PalceId) then 
+			outputDebug('•	Skipped %s', identifier)
+			continue
+		end
 		
 		local status = Commands:Register(command)
 
 		if status == 0 then -- success
 			outputDebug('•	Registered %s', identifier)
 		end
+
+		outputDebug('')
 	end
+
+	
 	
 	Framework.loadingCommands = false
+end)
+
+Framework:OnClick('Settings', function()
+	local enabled = not Framework:GetDockWidgetEnabled('Settings')
+
+	Framework:EnableDockWidget('Settings', enabled)
 end)
 
 Framework:OnClick('Commands Editor', function()
@@ -171,10 +187,4 @@ Framework:OnClick('Commands Editor', function()
 	
 	Commands:Load()
 	Framework:EnableDockWidget('CEditor', enabled)
-end)
-
-Framework:OnClick('Comments Editor', function()
-	local enabled = not Framework:GetDockWidgetEnabled('CTEditor')
-
-	Framework:EnableDockWidget('CTEditor', enabled)
 end)
