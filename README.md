@@ -23,6 +23,54 @@ In order to use the RoIntellisense Command Editor:
 
 ## Documentation
 
+### Functions
+
+Format:
+```lua
+--[[
+  description
+
+  @param type arg description
+  
+  @return type description
+]]
+function func()
+
+end
+```
+
+Note: Anything that is not prefixed with @ will be considered part of the description. If the @param tag is incomplete (e.g. @param type arg), it will be ignored.
+
+- __Tag__: param
+- __Strict__: Yes
+- __Required__: No
+- __Description__: The parameter.
+
+#
+
+- __Tag__: return
+- __Strict__: No
+- __Required__: No
+- __Description__: What the function returns.
+
+### Command Editor
+
+Format:
+```lua
+return {
+	identifier = 'template';
+	priority = 1;
+
+	label = 'test';
+	kind = Enum.CompletionItemKind.Snippet;
+	documentation = {
+		value = 'a test command';					
+	};
+	codeSample = [[print('test')]];
+	exclusiveTo = {};
+}
+```
+
 - __Property__: `identifier`
 - __Type__: string
 - __Optional__: Yes
