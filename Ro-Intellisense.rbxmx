@@ -5409,15 +5409,15 @@ Qy05NTc1LTQ5OTM3NTRDODhGMQ==]]></BinaryString>
 							<string name="Name">template</string>
 							<string name="ScriptGuid">{4E4415CE-B814-4420-9BF5-DAD7EF211E83}</string>
 							<ProtectedString name="Source"><![CDATA[return {
-	identifier = 'template'; 						 -- unique command identifier
-	priority = 1; 									 -- autocomplete priority
+	identifier = 'template';
+	priority = 1;
 
-	label = 'helloworld'; 							 -- autocomplete label
-	kind = Enum.CompletionItemKind.Snippet; 		 -- autocomplete icon
+	label = 'helloworld';
+	kind = Enum.CompletionItemKind.Snippet;
 	documentation = {
-		value = 'logs "hello world" to the console'; -- documentation							
+		value = 'logs "hello world" to the console';
 	};
-	codeSample = [[print('hello world')]];			 -- code to replace
+	codeSample = [[print('hello world')]];
 }]]></ProtectedString>
 							<int64 name="SourceAssetId">-1</int64>
 							<BinaryString name="Tags"></BinaryString>
