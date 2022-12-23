@@ -1,11 +1,11 @@
 return {
-	identifier = 'template'; 						 -- unique command identifier
-	priority = 1; 									 -- autocomplete priority
+	identifier = 'template';
+	priority = 1;
 
-	label = 'helloworld'; 							 -- autocomplete label
-	kind = Enum.CompletionItemKind.Snippet; 		 -- autocomplete icon
+	label = 'helloworld';
+	kind = Enum.CompletionItemKind.Snippet;
 	documentation = {
-		value = 'logs "hello world" to the console'; -- documentation							
+		value = 'logs "hello world" to the console';
 	};
-	codeSample = [[print('hello world')]];			 -- code to replace
+	codeSample = [[print('hello world')]];
 }
