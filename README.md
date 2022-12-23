@@ -2,7 +2,7 @@
 
 RoIntellisense is a highly useful tool for Roblox developers, as it helps to streamline the coding process by providing more customizable and comprehensive autocomplete suggestions. In just a few clicks, RoIntellisense helps you to produce the same string of code with little to no effort! This can save you significant time and help you write faster, and more efficient!
 
-In addition to providing customizable autocomplete functionality, RoIntellisense also offers other helpful features such as comment dividers. These features will help you organize your code in just a few clicks!
+RoIntellisense not only offers customizable autocomplete functionality, but also provides additional helpful features like Functions. These features allow you to see the purpose of different functions and make coding easier.
 
 Overall, RoIntellisense is a valuable addition to any Roblox developer's toolkit, and we highly recommend giving it a try. Whether you're a seasoned pro or just starting with Roblox development, RoIntellisense can help you write better code more efficiently.
 
