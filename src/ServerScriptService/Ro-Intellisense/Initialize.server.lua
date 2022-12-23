@@ -13,7 +13,7 @@
 	FEATURES
 		- 	Customizable commands (suggested by TheDeadBoneDev, 27 June 2022)
 		-	Place exclusive commands
-		-	Comment Dividers
+		-	Functions
 		
 	BUILT-IN COMMANDS
 		-	helloworld
