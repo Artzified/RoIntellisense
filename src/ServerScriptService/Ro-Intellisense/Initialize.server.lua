@@ -44,6 +44,7 @@ local UIWrappers = RoIntellisense.UIWrappers
 
 local CEditorWrapper = UIWrappers.CEditor
 local SettingsWrapper = UIWrappers.Settings
+local FunctionsWrapper = UIWrappers.Functions
 
 -- [[ PLUGIN ]]
 
@@ -64,6 +65,8 @@ CollectionManager:__env(plugin, Framework)
 -- [[ PLUGIN BUTTONS ]]
 
 Framework:CreateToolbarButton('Ro-Intellisense', 'Turn Ro-Intellisense on/off', 11358529382)
+Framework:CreateToolbarButton('Functions', 'Documents the s', 11888555194)
+
 Framework:CreateToolbarButton('Settings', 'Plugin configuration', 11358544124)
 
 Framework:CreateToolbarButton('Commands Editor', 'Edit command snippets', 11817732062)
@@ -86,6 +89,7 @@ local info = {
 
 Framework:CreateDockWidgetGui('CEditor', CEditorWrapper, info)
 Framework:CreateDockWidgetGui('Settings', SettingsWrapper, info)
+Framework:CreateDockWidgetGui('Functions', FunctionsWrapper, info)
 
 -- [[ FUNCTIONS ]]
 
@@ -170,8 +174,6 @@ Framework:OnClick('Ro-Intellisense', function()
 
 		outputDebug('')
 	end
-
-	
 	
 	Framework.loadingCommands = false
 end)
@@ -187,4 +189,10 @@ Framework:OnClick('Commands Editor', function()
 	
 	Commands:Load()
 	Framework:EnableDockWidget('CEditor', enabled)
+end)
+
+Framework:OnClick('Functions', function()
+	local enabled = not Framework:GetDockWidgetEnabled('Functions')
+	
+	Framework:EnableDockWidget('Functions', enabled)
 end)
