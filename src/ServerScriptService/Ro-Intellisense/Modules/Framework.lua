@@ -86,7 +86,7 @@ function module:CreateCoreGui(id: string, wrapper: ScreenGui)
 end
 
 function module:Output(str: string, ...)
-	warn('[' .. plugin.Name .. '] ' .. str:format(...))
+	warn('[RoIntellisense] ' .. str:format(...))
 end
 
 -- [[ SETTERS ]]
